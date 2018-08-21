@@ -1,12 +1,14 @@
 const EMPTY_BOARD = '-';
 
-export const play = (board) => {
-	let result;
-	do {
-		result = Math.floor(Math.random() * 9);
-	} while(!isMovePossible(board, result));
-	
-	return result;
+export const play = (board, callback) => {
+	setTimeout(() => {
+		let pos;
+		do {
+			pos = Math.floor(Math.random() * 9);
+		} while(!isMovePossible(board, pos));
+		
+		callback(pos, 'O');	
+	}, Math.random() * 3000);	
 }
 
 const isFirstMove = (board) => {		

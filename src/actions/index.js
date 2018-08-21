@@ -3,3 +3,7 @@ export const setBoardAction = (pos, value) => ({
 	value: value,
 	pos: pos
 });
+
+export const resetGame = () => ({
+	type: 'RESET_GAME'
+});
