@@ -11,13 +11,21 @@ class Game extends React.Component {
 	}
 	
 	render() {
-
-	    // Verify if is the AI's turn
-	    if(this.props.playTurn === 1)
-	        this.callAIPlay();
-	    // Verify if the game is ended.
-	    if(!this.props.canMoves)
-	        this.props.resetGame();
+        // Verify if the game is ended.
+        if(this.props.gameState === 0) {
+            // Verify if is the AI's turn
+            if (this.props.playTurn === 1)
+                this.callAIPlay();
+        } else {
+            if(this.props.gameState === -1) {
+                console.log('Nobody wins');
+            } else if(this.props.playTurn === 1) {
+                console.log('You win');
+            } else {
+                console.log('You lose');
+            }
+            this.props.resetGame();
+		}
 
 		return(			
 			<GameBoard boardValues={this.props.boardValues} onClick={(pos) => this.clickBoardHandle(pos)} />			
@@ -44,7 +52,7 @@ class Game extends React.Component {
 const mapStateToProps = store => ({
 	boardValues: store.mainReducer.board,
 	playTurn: store.mainReducer.playTurn,
-    canMoves: store.mainReducer.canMoves
+    gameState: store.mainReducer.gameState
 });
 
 const mapDispatchToProps = dispatch =>
