@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setBoardAction, resetGame } from '../actions';
 import { GameBoard } from './GameBoard';
+import { ScoreBoard } from './ScoreBoard';
 import { play } from '../ai/TicTacToeAI';
 
 class Game extends React.Component {
@@ -18,18 +19,14 @@ class Game extends React.Component {
             if (this.props.playTurn === 1)
                 this.callAIPlay();
         } else {
-            if(this.props.gameState === -1) {
-                console.log('Nobody wins');
-            } else if(this.props.playTurn === 1) {
-                console.log('You win');
-            } else {
-                console.log('You lose');
-            }
             this.resetGame();
 		}
 
-		return(			
-			<GameBoard boardValues={this.props.boardValues} onClick={(pos) => this.clickBoardHandle(pos)} />			
+		return(
+		    <div>
+		        <ScoreBoard score={this.props.score} turn={this.props.playTurn} state={this.props.gameState} />
+			    <GameBoard boardValues={this.props.boardValues} onClick={(pos) => this.clickBoardHandle(pos)} />
+            </div>
 		);
 	}
 	
@@ -48,9 +45,8 @@ class Game extends React.Component {
             .then( (param) =>  this.setBoardValue(param.pos, param.value));
     }
 
-    async resetGame() {
+    resetGame() {
 	    setTimeout(this.props.resetGame, 1000);
-	    return true;
     }
 }
 
