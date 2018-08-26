@@ -7,6 +7,7 @@ import { combineReducers } from 'redux';
  */
 const initialState = {
 	board: ['-', '-', '-', '-', '-', '-', '-', '-', '-'],
+	score: [0, 0],
 	gameState: 0,
 	playTurn: 0
 };
@@ -37,12 +38,20 @@ const checkGameState = (board) => {
 
 const setBoard = (state = initialState, action) => {
 	let aux = state.board;
-	aux[action.pos] = action.value;		
-	return {
+	let score = state.score;
+	aux[action.pos] = action.value;
+	// get current gameState
+    let gameState = checkGameState(aux);
+    // Check if someone wins
+    if(gameState > 0)
+        score[state.playTurn]++;
+
+    return {
 	    ...state,
         board: aux.slice(),
         playTurn: state.playTurn === 0 ? 1 : 0,
-        gameState: checkGameState(aux)
+        gameState: gameState,
+        score: score.slice()
     };
 };
 

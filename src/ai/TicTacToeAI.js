@@ -1,14 +1,16 @@
 const EMPTY_BOARD = '-';
 
-export const play = (board, callback) => {
-	setTimeout(() => {
-		let pos;
-		do {
-			pos = Math.floor(Math.random() * 9);
-		} while(!isMovePossible(board, pos));
-		
-		callback(pos, 'O');	
-	}, Math.random() * 3000);	
+export const play = async (board) => {
+	return new Promise( (resolve, reject) => {
+        setTimeout(() => {
+        	let pos;
+        	do {
+            	pos = Math.floor(Math.random() * 9);
+        	} while(!isMovePossible(board, pos));
+
+        	resolve({pos: pos, value: 'O'});
+    	}, Math.random() * 3000);
+	} );
 }
 
 const isFirstMove = (board) => {		

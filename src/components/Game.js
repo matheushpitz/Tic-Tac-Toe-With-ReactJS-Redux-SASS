@@ -11,6 +11,7 @@ class Game extends React.Component {
 	}
 	
 	render() {
+		console.log(this.props.score);
         // Verify if the game is ended.
         if(this.props.gameState === 0) {
             // Verify if is the AI's turn
@@ -24,7 +25,7 @@ class Game extends React.Component {
             } else {
                 console.log('You lose');
             }
-            this.props.resetGame();
+            this.resetGame();
 		}
 
 		return(			
@@ -43,16 +44,21 @@ class Game extends React.Component {
 	}
 
 	callAIPlay() {
-	    play(this.props.boardValues, (pos, value) => {
-	        this.setBoardValue(pos, value);
-        });
+	    play(this.props.boardValues)
+            .then( (param) =>  this.setBoardValue(param.pos, param.value));
+    }
+
+    async resetGame() {
+	    setTimeout(this.props.resetGame, 1000);
+	    return true;
     }
 }
 
 const mapStateToProps = store => ({
 	boardValues: store.mainReducer.board,
 	playTurn: store.mainReducer.playTurn,
-    gameState: store.mainReducer.gameState
+    gameState: store.mainReducer.gameState,
+	score: store.mainReducer.score
 });
 
 const mapDispatchToProps = dispatch =>
