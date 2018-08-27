@@ -23,7 +23,7 @@ class Game extends React.Component {
 		}
 
 		return(
-		    <div>
+		    <div className={'game'}>
 		        <ScoreBoard score={this.props.score} turn={this.props.playTurn} state={this.props.gameState} />
 			    <GameBoard boardValues={this.props.boardValues} onClick={(pos) => this.clickBoardHandle(pos)} />
             </div>

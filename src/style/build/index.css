@@ -1,5 +1,3 @@
-// SASS file
-
 .App {
   text-align: center;
   margin: auto;
@@ -22,3 +20,5 @@ div .player-score {
 div .computer-score {
   float: right;
 }
+
+/*# sourceMappingURL=index.css.map */

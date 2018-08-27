@@ -10,10 +10,18 @@ export const ScoreBoard = (props) => {
         gameMessage = props.turn === 0 ? 'Computer won the round' : 'You won the round';
     }
     return(
-        <div>
-            <p>You {props.score[0]}</p>
-            <p>Computer {props.score[1]}</p>
-            <p>{gameMessage}</p>
+        <div className={'score-board'}>
+            <div className={'score'}>
+                <div className={'player-score'}>
+                    <p>You {props.score[0]}</p>
+                </div>
+                <div className={'computer-score'}>
+                    <p>{props.score[1]} Computer</p>
+                </div>
+            </div>
+            <div className={'message-state'}>
+                <p>{gameMessage}</p>
+            </div>
         </div>
     );
 };

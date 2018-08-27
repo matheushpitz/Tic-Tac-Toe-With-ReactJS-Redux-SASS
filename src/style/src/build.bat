@@ -1,0 +1,1 @@
+sass index.scss ../build/index.css
